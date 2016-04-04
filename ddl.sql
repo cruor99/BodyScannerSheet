@@ -1,43 +1,46 @@
-CREATE DATABASE InnerBobyScanDB;
+CREATE DATABASE InnerBodyScanDB;
 
-CREATE TABLE users (
-	user_email TEXT NOT NULL PRIMARY KEY,
+USE InnerBodyScanDB;
+
+CREATE TABLE Users (
+	user_id MEDIUMINT NOT NULL AUTO_INCREMENT,
+	user_email TEXT NOT NULL,
 	user_name TEXT NOT NULL,
-	start_date DATE NOT NULL,
-	sex VARCHAR(5), -- (MAN OR WOMAN)
-	age int,
-	hight int -- centimeters
+	user_start_date DATE NOT NULL,
+	user_sex VARCHAR(5), -- (MAN OR WOMAN)
+	user_age int,
+	user_height int, -- centimeters
+
+	PRIMARY KEY (user_id)
 	);
 
-CREATE TABLE user_settings (
-	user_email TEXT PRIMARY KEY FOREIGN KEY REFERENCES users(user_email),
-	friend_limited VARCHAR(20) -- (NO SCANES, LAST SCAN, LAST MONTH, ALL SCANES)
-	friend VARCHAR(20) -- (NO SCANES, LAST SCAN, LAST MONTH, ALL SCANES)
-	friend_trusted VARCHAR(20) -- (NO SCANES, LAST SCAN, LAST MONTH, ALL SCANES)
-	coach VARCHAR(20) -- (NO SCANES, LAST SCAN, LAST MONTH, ALL SCANES)
+CREATE TABLE Friend_list (
+	user_id MEDIUMINT PRIMARY KEY,
+	friend_id MEDIUMINT NOT NULL,
+	friend_status VARCHAR(6), -- (coach/friend)
+
+	FOREIGN KEY (user_id) REFERENCES Users(user_id),
+	FOREIGN KEY (friend_id) REFERENCES Users(user_id)
 	);
 
-CREATE TABLE friend_list (
-	user_email TEXT PRIMARY KEY FOREIGN KEY REFERENCES users(user_email),
-	user_email_friend TEXT NOT NULL FOREIGN KEY users(user_email),
-	friend_status VARCHAR(20) --(friend_limited, friend, friend_trusted, coach)
-	);
-
-CREATE TABLE scan (
-	scan_ID INTEGER PRIMARY KEY,
-	user_email TEXT NOT NULL FOREIGN KEY REFERENCES users(user_email),
-	user_email_writer TEXT NOT NULL FOREIGN KEY REFERENCES users(user_email),
-	scan_time TEXT NOT NULL,
-	comment_user TEXT,
-	comment_coach TEXT,
-	weight DOUBLE,
+CREATE TABLE Scan (
+	scan_id MEDIUMINT AUTO_INCREMENT PRIMARY KEY,
+	user_id MEDIUMINT NOT NULL,
+	author_id MEDIUMINT NOT NULL,
+	scan_date DATE NOT NULL,
+	user_comment TEXT,
+	coach_comment TEXT,
+	weight DOUBLE, -- kg
 	BMI DOUBLE,
-	fat_procentage DOUBLE,
-	metabolisme INT,
+	fat_percentage DOUBLE,
+	metabolism INT,
 	metabolic_age INT,
-	water_procentage DOUBLE,
+	water_percentage DOUBLE,
 	visceral_fat DOUBLE,
 	bone_mass DOUBLE,
 	muscle_mass DOUBLE,
-	physical_score DOUBLE
+	physical_score DOUBLE,
+
+	FOREIGN KEY (user_id) REFERENCES Users(user_id),
+	FOREIGN KEY (author_id) REFERENCES Users(user_id)
 	);
