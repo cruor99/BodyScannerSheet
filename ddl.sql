@@ -1,8 +1,8 @@
-CREATE DATABASE InnerBodyScanDB;
+CREATE DATABASE IF NOT EXISTS InnerBodyScanDB;
 
 USE InnerBodyScanDB;
 
-CREATE TABLE Users (
+CREATE TABLE IF NOT EXISTS Users (
 	user_id MEDIUMINT NOT NULL AUTO_INCREMENT,
 	user_email TEXT NOT NULL,
 	user_name TEXT NOT NULL,
@@ -14,8 +14,8 @@ CREATE TABLE Users (
 	PRIMARY KEY (user_id)
 	);
 
-CREATE TABLE Friend_list (
-	user_id MEDIUMINT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS Friend_list (
+	user_id MEDIUMINT NOT NULL PRIMARY KEY,
 	friend_id MEDIUMINT NOT NULL,
 	friend_status VARCHAR(6), -- (coach/friend)
 
@@ -23,7 +23,7 @@ CREATE TABLE Friend_list (
 	FOREIGN KEY (friend_id) REFERENCES Users(user_id)
 	);
 
-CREATE TABLE Scan (
+CREATE TABLE IF NOT EXISTS Scan (
 	scan_id MEDIUMINT AUTO_INCREMENT PRIMARY KEY,
 	user_id MEDIUMINT NOT NULL,
 	author_id MEDIUMINT NOT NULL,
