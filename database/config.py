@@ -1,4 +1,5 @@
-# remeber to set config 
+# THIS IS A TEMPLATE
+# remember to set config
 database = "database"
 user ="user"
 password = "password"
