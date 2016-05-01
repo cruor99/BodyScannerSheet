@@ -1,0 +1,54 @@
+#:import Toolbar kivymd.toolbar.Toolbar
+#:import ThemeManager kivymd.theming.ThemeManager
+#:import NavigationDrawer kivymd.navigationdrawer.NavigationDrawer
+#:import MDCheckbox kivymd.selectioncontrols.MDCheckbox
+#:import MDSwitch kivymd.selectioncontrols.MDSwitch
+#:import MDList kivymd.list.MDList
+#:import OneLineListItem kivymd.list.OneLineListItem
+#:import TwoLineListItem kivymd.list.TwoLineListItem
+#:import ThreeLineListItem kivymd.list.ThreeLineListItem
+#:import OneLineAvatarListItem kivymd.list.OneLineAvatarListItem
+#:import OneLineIconListItem kivymd.list.OneLineIconListItem
+#:import OneLineAvatarIconListItem kivymd.list.OneLineAvatarIconListItem
+#:import SingleLineTextField kivymd.textfields.SingleLineTextField
+#:import MDSpinner kivymd.spinner.MDSpinner
+#:import MDCard kivymd.card.MDCard
+#:import MDDropdownMenu kivymd.menu.MDDropdownMenu
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import colors kivymd.color_definitions.colors
+#:import SmartTile kivymd.grid.SmartTile
+
+BoxLayout:
+    orientation: 'vertical'
+    Toolbar:
+        id: toolbar
+        title: 'Body Scanning Sheet'
+        left_action_items: [['menu', lambda x: app.nav_drawer.toggle()]]
+    ScreenManager:
+        id: scr_mngr
+        Screen:
+            name: 'home'
+
+<MDIconButton>
+    size_hint: (None, None)
+    size: (dp(48), dp(48))
+    padding: dp(12)
+    theme_text_color: 'Primary'
+    MDLabel:
+        id: _label
+        font_style: 'Icon'
+        text: u"{}".format(md_icons[root.icon])
+        halign: 'center'
+        theme_text_color: root.theme_text_color
+        text_color: root.text_color
+        opposite_colors: root.opposite_colors
+        valign: 'middle'
+
+<BodyScanNavDrawer>
+	title: "NavigationDrawer"
+	NavigationDrawerIconButton:
+		icon: 'circle'
+		text: "fish"
+	NavigationDrawerIconButton:
+		icon: 'circle'
+		text: "captain db"
