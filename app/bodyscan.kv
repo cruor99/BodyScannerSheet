@@ -27,6 +27,54 @@ BoxLayout:
     ScreenManager:
         id: scr_mngr
         Screen:
+            name: 'login'
+            ScrollView
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: dp(325)
+                    BoxLayout:
+                        size_hint_y: None
+                        height: dp(88)
+                        padding: dp(48)
+                        SingleLineTextField:
+                            id: username_textfield
+                            size_hint: 0.8, None
+                            height: dp(48)
+                            hint_text: "Username"
+                            write_tab: False
+                    BoxLayout:
+                        size_hint_y: None
+                        height: dp(88)
+                        padding: dp(48)
+                        SingleLineTextField:
+                            id: password_textfield
+                            size_hint: 0.8, None
+                            height: dp(48)
+                            hint_text: "Password"
+                            password: True
+                            write_tab: False
+                    BoxLayout:
+                        size_hint_y: None
+                        height: dp(88)
+                        padding: dp(200)
+                        orientation: 'horizontal'
+                        spacing: dp(88)
+                        MDRaisedButton:
+                            text: "Login"
+                            elevation_normal: 2
+                            opposite_colors: True
+                            size_hint: None, None
+                            size: 3 * dp(48), dp(48)
+                            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        MDRaisedButton:
+                            text: "Register"
+                            elevation_normal: 2
+                            opposite_colors: True
+                            size_hint: None, None
+                            size: 3 * dp(48), dp(48)
+                            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        Screen:
             name: 'home'
 
 <MDIconButton>
