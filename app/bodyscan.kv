@@ -23,7 +23,7 @@ BoxLayout:
     Toolbar:
         id: toolbar
         title: 'Body Scanning Sheet'
-        left_action_items: [['menu', lambda x: app.nav_drawer.toggle()]]
+        left_action_items: [['menu', lambda x: app.nav_drawer.toggle() if (app.root.ids.scr_mngr.current == 'home') else None]]
     ScreenManager:
         id: scr_mngr
         Screen:
@@ -54,6 +54,7 @@ BoxLayout:
                             hint_text: "Password"
                             password: True
                             write_tab: False
+                            on_text_validate: app.root.ids.scr_mngr.current = 'home'
                     BoxLayout:
                         size_hint_y: None
                         height: dp(88)
@@ -67,6 +68,7 @@ BoxLayout:
                             size_hint: None, None
                             size: 3 * dp(48), dp(48)
                             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                            on_release: app.root.ids.scr_mngr.current = 'home'
                         MDRaisedButton:
                             text: "Register"
                             elevation_normal: 2
