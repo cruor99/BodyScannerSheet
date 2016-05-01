@@ -23,6 +23,8 @@ class BodyScanApp(App):
 	def build(self):
 		rootwidget = BodyScanRoot()
 		self.nav_drawer = BodyScanNavDrawer()
+		self.theme_cls.primary_palette = "Blue"
+		self.theme_cls.primary_hue = "500"
 
 
 if __name__ == "__main__":
