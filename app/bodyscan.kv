@@ -24,60 +24,94 @@ BoxLayout:
         id: toolbar
         title: 'Body Scanning Sheet'
         left_action_items: [['menu', lambda x: app.nav_drawer.toggle() if (app.root.ids.scr_mngr.current == 'home') else None]]
+        
     ScreenManager:
         id: scr_mngr
-        Screen:
+        LoginScreen:
+            id: login
             name: 'login'
-            ScrollView:
-                BoxLayout:
-                    orientation: 'vertical'
-                    size_hint_y: None
-                    height: dp(325)
-                    BoxLayout:
-                        size_hint_y: None
-                        height: dp(88)
-                        padding: dp(48)
-                        SingleLineTextField:
-                            id: username_textfield
-                            size_hint: 0.8, None
-                            height: dp(48)
-                            hint_text: "Username"
-                            write_tab: False
-                    BoxLayout:
-                        size_hint_y: None
-                        height: dp(88)
-                        padding: dp(48)
-                        SingleLineTextField:
-                            id: password_textfield
-                            size_hint: 0.8, None
-                            height: dp(48)
-                            hint_text: "Password"
-                            password: True
-                            write_tab: False
-                            on_text_validate: app.root.ids.scr_mngr.current = 'home'
-                    BoxLayout:
-                        size_hint_y: None
-                        height: dp(88)
-                        padding: dp(200)
-                        orientation: 'horizontal'
-                        spacing: dp(88)
-                        MDRaisedButton:
-                            text: "Login"
-                            elevation_normal: 2
-                            opposite_colors: True
-                            size_hint: None, None
-                            size: 3 * dp(48), dp(48)
-                            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                            on_release: app.root.ids.scr_mngr.current = 'home'
-                        MDRaisedButton:
-                            text: "Register"
-                            elevation_normal: 2
-                            opposite_colors: True
-                            size_hint: None, None
-                            size: 3 * dp(48), dp(48)
-                            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-        Screen:
+        HomeScreen:
+            id: home
             name: 'home'
+
+
+<HomeScreen>
+    ScrollView:
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: dp(75)
+            BoxLayout:
+                orientation: 'horizontal'
+                spacing: dp(88)
+                padding: dp(200)
+                MDRaisedButton:
+                    text: "Add Scan"
+                    elevation_normal: 2
+                    opposite_colors: True
+                    size_hint: None, None
+                    size: 3 * dp(48), dp(48)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    on_release: app.root.ids.scr_mngr.current = 'home' # replace 'home' with addScan when created
+                MDRaisedButton:
+                    text: "Edit Scan"
+                    elevation_normal: 2
+                    opposite_colors: True
+                    size_hint: None, None
+                    size: 3 * dp(48), dp(48)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+
+<LoginScreen>
+    ScrollView:
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: dp(325)
+            BoxLayout:
+                size_hint_y: None
+                height: dp(88)
+                padding: dp(48)
+                SingleLineTextField:
+                    id: username_textfield
+                    size_hint: 0.8, None
+                    height: dp(48)
+                    hint_text: "Username"
+                    write_tab: False
+            BoxLayout:
+                size_hint_y: None
+                height: dp(88)
+                padding: dp(48)
+                SingleLineTextField:
+                    id: password_textfield
+                    size_hint: 0.8, None
+                    height: dp(48)
+                    hint_text: "Password"
+                    password: True
+                    write_tab: False
+                    on_text_validate: app.root.ids.scr_mngr.current = 'home'
+            BoxLayout:
+                size_hint_y: None
+                height: dp(88)
+                padding: dp(200)
+                orientation: 'horizontal'
+                spacing: dp(88)
+                MDRaisedButton:
+                    text: "Login"
+                    elevation_normal: 2
+                    opposite_colors: True
+                    size_hint: None, None
+                    size: 3 * dp(48), dp(48)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    on_release: app.root.ids.scr_mngr.current = 'home'
+                MDRaisedButton:
+                    text: "Register"
+                    elevation_normal: 2
+                    opposite_colors: True
+                    size_hint: None, None
+                    size: 3 * dp(48), dp(48)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
 
 <MDIconButton>
     size_hint: (None, None)
@@ -93,6 +127,7 @@ BoxLayout:
         text_color: root.text_color
         opposite_colors: root.opposite_colors
         valign: 'middle'
+
 
 <BodyScanNavDrawer>
 	title: "NavigationDrawer"

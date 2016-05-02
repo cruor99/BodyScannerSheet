@@ -11,6 +11,8 @@ from kivymd.button import MDIconButton
 from kivymd.theming import ThemeManager
 from kivymd.navigationdrawer import NavigationDrawer
 
+from screens import *
+
 
 class BodyScanRoot(BoxLayout):
 	pass
