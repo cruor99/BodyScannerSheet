@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 from kivy.app import App
@@ -9,6 +10,7 @@ from kivy.metrics import dp
 from kivymd.button import MDIconButton
 from kivymd.theming import ThemeManager
 from kivymd.navigationdrawer import NavigationDrawer
+
 
 class BodyScanRoot(BoxLayout):
 	pass
@@ -25,7 +27,6 @@ class BodyScanApp(App):
 		self.nav_drawer = BodyScanNavDrawer()
 		self.theme_cls.primary_palette = "Blue"
 		self.theme_cls.primary_hue = "500"
-
 
 if __name__ == "__main__":
 	BodyScanApp().run()
