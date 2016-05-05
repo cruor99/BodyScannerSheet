@@ -1,4 +1,4 @@
-# BodyScannerSheet
+# BodyScannerSheet [![Build Status](https://travis-ci.org/Piees/BodyScannerSheet.svg?branch=master)](https://travis-ci.org/Piees/BodyScannerSheet)
 By Codesmen
 
 ## Install Guide:
