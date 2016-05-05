@@ -13,15 +13,17 @@ class Users(db.Model):
 	user_id = db.Column(db.Integer, primary_key=True)
 	user_email = db.Column(db.Text, nullable=False)
 	user_name = db.Column(db.Text, nullable=False)
+	user_password = db.Column(db.Text, nullable=False)
 	user_start_date = db.Column(db.DateTime, default=db.func.current_timestamp())
 	user_sex = db.Column(db.Text, nullable=True)
 	user_age = db.Column(db.INTEGER, nullable=True)
 	user_height = db.Column(db.INTEGER, nullable=True)
 
-	def __init__(self, user_id, user_email, user_name):
+	def __init__(self, user_id, user_email, user_name, user_password):
 		self.user_id = user_id
 		self.user_email = user_email
 		self.user_name = user_name
+		self.user_password = user_password
 
 class Friend_List(db.Model):
 	__tablename__ = 'Friend_List'
