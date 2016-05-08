@@ -18,13 +18,16 @@
 #:import colors kivymd.color_definitions.colors
 #:import SmartTile kivymd.grid.SmartTile
 
-BoxLayout:
+BodyScanRoot:
     orientation: 'vertical'
     Toolbar:
         id: toolbar
         title: 'Body Scanning Sheet'
         left_action_items: [['menu', lambda x: app.nav_drawer.toggle() if (app.root.ids.scr_mngr.current == 'home') else None]]
-        
+#        left_action_items: [['menu', lambda x: app.nav_drawer.toggle() if (app.root.ids.scr_mngr.current == 'home') else None]]
+#        left_action_items: app.rootwidget.leftActionItems()
+#        left_action_items: [[u"{}".format('menu' if (app.root.ids.scr_mngr.current == 'home') else 'map'), lambda x: app.nav_drawer.toggle()]]
+
     ScreenManager:
         id: scr_mngr
         LoginScreen:
@@ -33,14 +36,19 @@ BoxLayout:
         HomeScreen:
             id: home
             name: 'home'
+        UserScreen:
+            id: user
+            name: 'user'
 
 
-<HomeScreen>
+<UserScreen>
+    id: UserScreen
     ScrollView:
         BoxLayout:
             orientation: 'vertical'
             size_hint_y: None
             height: dp(75)
+            id: userBoxLayout
             BoxLayout:
                 orientation: 'horizontal'
                 spacing: dp(88)
@@ -103,7 +111,8 @@ BoxLayout:
                     size_hint: None, None
                     size: 3 * dp(48), dp(48)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                    on_release: app.root.ids.scr_mngr.current = 'home'
+#                    on_release: app.root.ids.scr_mngr.current = 'home'
+                    on_release: UserScreen.populateUserScans()
                 MDRaisedButton:
                     text: "Register"
                     elevation_normal: 2
@@ -130,10 +139,38 @@ BoxLayout:
 
 
 <BodyScanNavDrawer>
-	title: "NavigationDrawer"
-	NavigationDrawerIconButton:
-		icon: 'circle'
-		text: "fish"
-	NavigationDrawerIconButton:
-		icon: 'circle'
-		text: "captain db"
+    title: "Scans"
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Your Scans"
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Kirsti's Scans"
+    NavigationDrawerIconButton:
+        icon: 'plus-circle'
+        text: 'Add Friend/Coach'
+        on_release: app.showAddUserdialog()
+
+
+<AddUserContent>
+    selectRightsButton: selectRightsButton
+    BoxLayout:
+        size_hint_y: None
+        height: dp(88)
+        padding: dp(8)
+        spacing: dp(44)
+        orientation: 'vertical'
+        SingleLineTextField:
+            id: username_textfield
+            size_hint: 0.8, None
+            height: dp(48)
+            hint_text: "Username"
+            write_tab: False
+        BoxLayout:
+            size_hint_x: None
+            width: dp(88)
+            orientation: 'horizontal'
+            MDFlatButton:
+                id: selectRightsButton
+                text: root.selectRights
+                on_release: MDDropdownMenu(items=root.menu_items, width_mult=4).open(self)
