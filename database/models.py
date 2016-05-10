@@ -19,8 +19,8 @@ class Users(db.Model):
 	user_age = db.Column(db.INTEGER, nullable=True)
 	user_height = db.Column(db.INTEGER, nullable=True)
 
-	def __init__(self, user_id, user_email, user_name, user_password):
-		self.user_id = user_id
+
+	def __init__(self, user_email, user_name, user_password):
 		self.user_email = user_email
 		self.user_name = user_name
 		self.user_password = user_password
