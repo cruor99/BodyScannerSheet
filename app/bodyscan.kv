@@ -170,7 +170,15 @@ BodyScanRoot:
             size_hint_x: None
             width: dp(88)
             orientation: 'horizontal'
+            spacing: dp(124)
             MDFlatButton:
                 id: selectRightsButton
                 text: root.selectRights
                 on_release: MDDropdownMenu(items=root.menu_items, width_mult=4).open(self)
+            MDRaisedButton:
+                text: "Add"
+                elevation_normal: 2
+                opposite_colors: True
+                size_hint: None, None
+                size: 2 * dp(48), dp(48)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
