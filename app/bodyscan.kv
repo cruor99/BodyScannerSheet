@@ -39,6 +39,55 @@ BodyScanRoot:
         UserScreen:
             id: user
             name: 'user'
+        RegisterScreen:
+            id: register
+            name: 'register'
+
+<RegisterScreen>
+    id: RegisterScreen
+    ScrollView:
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: dp(325)
+            padding: dp(48)
+            MDLabel:
+                text: '* = required'
+                theme_text_color: 'Error'
+                halign: 'right'
+            SingleLineTextField:
+                id: register_username_textfield
+                size_hint: 0.8, None
+                height: dp(48)
+                hint_text: 'Username*'
+                write_tab: False
+            SingleLineTextField: # Todo: add email validator
+                id: register_email_textfield
+                size_hint: 0.8, None
+                height: dp(48)
+                hint_text: 'Email*'
+                write_tab: False
+            SingleLineTextField:
+                id: register_remail_textfield
+                size_hint: 0.8, None
+                height: dp(48)
+                hint_text: 'Re-enter email*'
+                write_tab: False
+            SingleLineTextField:
+                id: register_username_textfield
+                size_hint: 0.8, None
+                height: dp(48)
+                hint_text: 'Password*'
+                write_tab: False
+                password: True
+            MDRaisedButton:
+                text: "Register"
+                elevation_normal: 2
+                opposite_colors: True
+                size_hint: None, None
+                size: 3 * dp(48), dp(48)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                on_release: app.register(register_email_textfield.text, register_username_textfield.text, register_email_textfield.text)
 
 
 <UserScreen>
@@ -120,6 +169,7 @@ BodyScanRoot:
                     size_hint: None, None
                     size: 3 * dp(48), dp(48)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    on_release: app.root.ids.scr_mngr.current = 'register'
 
 
 <MDIconButton>

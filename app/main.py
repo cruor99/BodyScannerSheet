@@ -15,7 +15,11 @@ from kivymd.label import MDLabel
 from kivymd.dialog import MDDialog
 from kivymd.textfields import SingleLineTextField
 
+from models import *
 from screens import *
+
+from models.models import Users, Friend_List, Scan, db
+
 
 
 class BodyScanRoot(BoxLayout):
@@ -66,9 +70,11 @@ class BodyScanApp(App):
 	username = StringProperty("")
 	rights = StringProperty("")
 
+	def register(self, email, name, password):
+		db.add(Users(user_email=email, user_name=name, user_password=password))
+		db.commit()
 
 	def showAddUserdialog(self):
-
 		content = AddUserContent()
 		self.dialog = MDDialog(title="Add Friend/Coach",
 								content=content,
