@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import bcrypt
 
 from kivy.app import App
 from kivy.properties import ObjectProperty, StringProperty, ListProperty
@@ -17,13 +18,25 @@ from kivymd.textfields import SingleLineTextField
 
 from models import *
 from screens import *
-
 from models.models import Users, Friend_List, Scan, db
 
 
 
 class BodyScanRoot(BoxLayout):
-	pass
+	def login(self, username, password):
+		user = db.query(Users).filter_by(user_name = username).first()
+		print user
+		if bcrypt.hashpw(password, user.user_password) == user.user_password:
+			self.updateUserInfo(username, 'Coach')
+			self.ids.scr_mngr.current = 'home'
+
+	def updateUserInfo(self, username, rights):
+		self.username = username
+		self.rights = rights
+
+	def register(self, email, name, password):
+		db.add(Users(user_email=email, user_name=name, user_password=password))
+		db.commit()
 
 class FriendTextField(SingleLineTextField):
 
@@ -70,10 +83,6 @@ class BodyScanApp(App):
 	username = StringProperty("")
 	rights = StringProperty("")
 
-	def register(self, email, name, password):
-		db.add(Users(user_email=email, user_name=name, user_password=password))
-		db.commit()
-
 	def showAddUserdialog(self):
 		content = AddUserContent()
 		self.dialog = MDDialog(title="Add Friend/Coach",
@@ -81,16 +90,10 @@ class BodyScanApp(App):
 								size_hint=(.8, None),
 								height=dp(200),
 								auto_dismiss=False)
-
 		self.dialog.add_action_button("Dismiss",
 										action=lambda
 										*x: self.dialog.dismiss())
 		self.dialog.open()
-
-	def updateUserInfo(self, username, rights):
-		self.username = username
-		self.rights = rights
-
 
 	def build(self):
 		self.nav_drawer = BodyScanNavDrawer()

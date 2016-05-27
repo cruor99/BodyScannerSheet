@@ -87,7 +87,7 @@ BodyScanRoot:
                 size_hint: None, None
                 size: 3 * dp(48), dp(48)
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                on_release: app.register(register_email_textfield.text, register_username_textfield.text, register_email_textfield.text)
+                on_release: app.root.register(register_email_textfield.text, register_username_textfield.text, register_email_textfield.text)
 
 
 <UserScreen>
@@ -146,7 +146,7 @@ BodyScanRoot:
                     hint_text: "Password"
                     password: True
                     write_tab: False
-                    on_text_validate: app.root.ids.scr_mngr.current = 'home'
+                    on_text_validate: app.root.login(username_textfield.text, password_textfield.text)
             BoxLayout:
                 size_hint_y: None
                 height: dp(88)
@@ -161,7 +161,7 @@ BodyScanRoot:
                     size: 3 * dp(48), dp(48)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 #                    on_release: app.root.ids.scr_mngr.current = 'home'
-                    on_release: UserScreen.populateUserScans()
+                    on_release: app.root.login(username_textfield.text, password_textfield.text)
                 MDRaisedButton:
                     text: "Register"
                     elevation_normal: 2
