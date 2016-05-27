@@ -23,16 +23,25 @@ from models.models import Users, Friend_List, Scan, db
 
 
 class BodyScanRoot(BoxLayout):
+	username = StringProperty("")
+	rights = StringProperty("")
+
 	def login(self, username, password):
 		user = db.query(Users).filter_by(user_name = username).first()
 		print user
-		if bcrypt.hashpw(password, user.user_password) == user.user_password:
+		if bcrypt.hashpw(password.encode('UTF_8'), user.user_password) == user.user_password:
 			self.updateUserInfo(username, 'Coach')
 			self.ids.scr_mngr.current = 'home'
 
 	def updateUserInfo(self, username, rights):
 		self.username = username
 		self.rights = rights
+
+	def getUserInfo(self):
+		return [app]
+
+	def goToUserScreen(self, username):
+		self.updateUserInfo(username, )
 
 	def register(self, email, name, password):
 		db.add(Users(user_email=email, user_name=name, user_password=password))
